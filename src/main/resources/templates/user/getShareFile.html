@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row clearfix" th:fragment="replace">
+    <h3>
+        获取分享
+    </h3>
+    <div class="row clearfix" style="width: 975px; margin-right: 0px;margin-left: 0px;">
+        <form class="form-horizontal" method="post" role="form" th:object="${shareFile}" th:action="@{/user/getShareFile}" >
+            <div class="form-group" style="margin-right:0px; margin-left:0px;">
+                <label for="inputShareId" class="col-sm-2 control-label" style="text-align: left;padding-left: 0px;padding-right: 0px;width: auto;">文件分享ID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputShareId" placeholder="请输入文件分享ID，由11位字母组成，不分区大小写"
+                           th:field="*{shareid}"/>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10" style="display: contents;">
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table" id="fileTable">
+        <thead>
+        <tr>
+            <th>
+                文件名
+            </th>
+            <th>
+                修改时间
+            </th>
+            <th>
+                文件类型
+            </th>
+            <th>
+                文件大小
+            </th>
+            <th>
+                分享者ID
+            </th>
+            <th>
+                文件操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <span th:text="${session.shareFileDetail.name}"></span>
+            </td>
+            <td>
+                <span th:text="${session.shareFileDetail.time}"></span>
+            </td>
+            <td>
+                <span th:text="${session.shareFileDetail.style}"></span>
+            </td>
+            <td>
+                <span th:text="${session.shareFileDetail.size}"></span>
+            </td>
+            <td>
+                <span th:text="${session.shareFile.userid}"></span>
+            </td>
+            <td>
+                <span th:if="${not #strings.isEmpty(session.shareFileDetail.fileid)}">
+                    <a th:href="'@{/user/downFile?fileId='+${session.shareFileDetail.fileid}+'}'">下载</sapn></a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

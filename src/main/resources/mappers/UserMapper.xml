@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.networkdisk.repository.UserRepository">
+    <!-- 处理用户登录请求，主要根据邮箱和密码进行查询   -->
+    <select id="userLogin" parameterType="BUser" resultType="BUser">
+        select *
+        from busertable
+        where email = #{email}
+          and pwd = #{pwd}
+    </select>
+
+    <!-- 处理查询请求，根据用户邮箱进行查询   -->
+    <select id="selectUserByEmail" parameterType="String" resultType="BUser">
+        select * from busertable where email = #{email}
+    </select>
+
+    <!-- 处理查询请求，根据用户id进行查询   -->
+    <select id="selectUserById" parameterType="String" resultType="BUser">
+        select * from busertable where id = #{id}
+    </select>
+
+    <!-- 处理注册请求，插入用户信息   -->
+    <insert id="register" parameterType="BUser">
+        insert into busertable value(#{id}, #{email}, #{pwd}, #{name})
+    </insert>
+
+    <!-- 处理删除请求，删除用户信息   -->
+    <delete id="deleteUser" parameterType="BUser">
+        delete form table where id = #{id}
+    </delete>
+</mapper>

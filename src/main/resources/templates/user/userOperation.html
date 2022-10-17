@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户操作页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/myNetworkDisk.js}"></script>
+    <script th:src="@{/js/getShareFile.js}"></script>
+    <script th:src="@{/js/myShareFile.js}"></script>
+    <script th:src="@{/js/recycleBin.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 显示时间
+            var currentDate = new Date();
+            var hour = currentDate.getHours();
+            var obj = $("#currentTime");
+            if (hour < 6) {
+                obj.append("欢迎，凌晨好！")
+            } else if (hour < 12) {
+                obj.append("欢迎，上午好！")
+            } else if (hour < 18) {
+                obj.append("欢迎，下午好！")
+            } else if (hour < 24) {
+                obj.append("欢迎，晚上好！")
+            } else {
+                obj.append("时间读取错误！");
+            }
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <img alt="logo" src="../images/logo.png" style="width: 100%; height: 100%"/>
+        </div>
+        <div class="col-md-8 column">
+            <div class="page-header">
+                <h1>
+                    <span id="currentTime"></span> <small th:text="${session.bUser.name}"></small>
+                </h1>
+            </div>
+        </div>
+        <div class="col-md-2 column" style="display: flex;align-items: center;justify-content: center;height: 119px;">
+            <button type="button" class="btn btn-lg" onclick="location.href='personCenter'">个人中心</button>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2 column" style="margin-top: 0px;padding-left: 45px;padding-right: 45px;padding-top: 15px;">
+            <button type="button" class="btn btn-lg" style="margin-bottom: 20px;width: 100%;"
+                    onclick="javascript:location.href='toMyNetworkDisk'">我的网盘
+            </button>
+            <button type="button" class="btn btn-lg" style="margin-bottom: 20px;width: 100%;"
+                    onclick="javascript:location.href='myShareFile'">我的分享
+            </button>
+            <button type="button" class="btn btn-lg" style="margin-bottom: 20px;width: 100%;"
+                    onclick="javascript:location.href='toGetShareFile'">获取分享
+            </button>
+            <button type="button" class="btn btn-lg" style="margin-bottom: 20px;width: 100%;"
+                    onclick="javascript:location.href='recycleBin'">回收站
+            </button>
+        </div>
+        <div class="col-md-10 column">
+            <div th:if="${session.currentModel}==1">
+                <div th:replace="user/myNetworkDisk :: replace"></div>
+            </div>
+<!--            <div th:if="${session.currentModel}==2">-->
+<!--                <div th:replace="user/myShareFile :: replace"></div>-->
+<!--            </div>-->
+            <div th:if="${session.currentModel}==3">
+                <div th:replace="user/getShareFile :: replace"></div>
+            </div>
+<!--            <div th:replace="recycleBin :: replace" th:if="${session.currentModel}==4"></div>-->
+            <!--            <div id="replaceArea"></div>-->
+            <div class="carousel slide" id="carousel-417026">
+                <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0" data-target="#carousel-417026">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-417026">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-417026">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active" style="height: 400px">
+                        <img alt="" src="../images/background1.png" style="width: 100%; height: 100%"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                First Thumbnail label
+                            </h4>
+                            <p>
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item" style="height: 400px">
+                        <img alt="" src="../images/background2.png" style="width: 100%; height: 100%"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                Second Thumbnail label
+                            </h4>
+                            <p>
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item" style="height: 400px">
+                        <img alt="" src="../images/background3.png" style="width: 100%; height: 100%"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                Third Thumbnail label
+                            </h4>
+                            <p>
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-417026" data-slide="prev"><span
+                        class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control"
+                                                                                href="#carousel-417026"
+                                                                                data-slide="next"><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

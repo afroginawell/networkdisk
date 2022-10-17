@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>错误页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">异常处理页面</h3>
+    </div>
+</div>
+<div class="container">
+    <div>
+        <h3>
+            <div th:if="${#strings.isEmpty(errorMessage)}">该页面发生错误，请返回上一级页面！</div>
+            <div th:text="${errorMessage}"></div>
+        </h3>
+        <br><br>
+        <span th:if="${errorMessage} != '未登录异常'"><a href="javascript:history.back()">返回</a></span>
+        <span th:if="${errorMessage} == '未登录异常'"><a th:href="@{/toLogin}">返回</a></span>
+    </div>
+</div>
+</body>
+</html>

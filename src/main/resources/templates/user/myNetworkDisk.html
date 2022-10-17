@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的网盘模块页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("refreshPage").click();
+            $("li:last").addClass("active");
+            var shareid = getUrlParam("shareid");
+            if(shareid){
+                alert("文件分享ID是 "+shareid+" 可以在我的分享中查看！");
+            }
+        };
+
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            // 点击“上传文件“按钮时，触发表单中的浏览文件的操作
+            $("#upload").click(function () {
+                $("#uploadFile").click();
+            })
+            // 选择好上传的文件后，执行提交表单的操作
+            $("#uploadFile").change(function () {
+                $("#uploadForm").submit();
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        function rename(obj){
+            var newName = prompt("请输入新的名字：");
+            // alert("renameFile?fileid="+$(obj).attr("id")+"&newName="+newName);
+            if(newName){
+                location.href="renameFile?fileid="+$(obj).attr("id")+"&newName="+newName;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div class="row clearfix" th:fragment="replace">
+    <h3>
+        我的网盘
+    </h3>
+    <div class="row clearfix" style="width: 975px;">
+        <div class="col-md-1 column">
+            <button type="button" class="btn btn-default" onclick="location.reload()" id="refreshPage">刷新</button>
+        </div>
+        <div class="col-md-9 column">
+            <ul class="breadcrumb">
+                <li th:each="parentFile,parentFileStat:${session.parentFile}">
+                    <a th:href="@{/user/findChildFile(fileid=${parentFile.key})}">
+                        <sapn th:text="${parentFile.value}"></sapn>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-1 column">
+            <button type="button" class="btn btn-default" onclick="javascript:location.href='createDir'">新建目录</button>
+        </div>
+        <div class="col-md-1 column">
+            <button type="button" class="btn btn-default" id="upload">上传文件</button>
+            <form style="display:none;" method="post" enctype="multipart/form-data" id="uploadForm"
+                  th:action="@{/user/uploadFile}">
+                <input type="file" id="uploadFile" name="uploadFile"/>
+            </form>
+        </div>
+    </div>
+    <table class="table" id="fileTable">
+        <thead>
+        <tr>
+            <th>
+                文件名
+            </th>
+            <th>
+                修改时间
+            </th>
+            <th>
+                文件类型
+            </th>
+            <th>
+                文件大小
+            </th>
+            <th>
+                文件操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="childFile:${session.childFile}">
+            <td>
+                <span th:if="${childFile.style}=='目录'">
+                    <a th:href="@{/user/openDir(fileid=${childFile.fileid},name=${childFile.name})}">
+                        <span th:text="${childFile.name}">
+                        </span>
+                     </a>
+                </span>
+                <span th:text="${childFile.name}" th:if="${childFile.style}!='目录'"></span>
+            </td>
+            <td>
+                <span th:text="${childFile.time}"></span>
+            </td>
+            <td>
+                <span th:text="${childFile.style}"></span>
+            </td>
+            <td>
+                <span th:text="${childFile.size}"></span>
+            </td>
+            <td>
+                <a href="javascript:void(0);" rel="external nofollow" th:id="${childFile.fileid}" onclick="rename(this)">更名</a>
+                <a th:href="@{/user/shareFile(fileid=${childFile.fileid})}">分享</sapn></a>
+                <a th:href="@{/user/downloadFile(fileid=${childFile.fileid})}">下载</sapn></a>
+                <a th:href="@{/user/deleteFile(fileid=${childFile.fileid})}">删除</sapn></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

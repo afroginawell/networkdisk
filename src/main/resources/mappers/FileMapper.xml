@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.networkdisk.repository.FileRepository">
+    <!-- 查询文件请求，根据父文件id和文件类型进行查询   -->
+    <select id="selectByParentid" parameterType="String" resultType="FileDetail">
+        select * from filedetailtable where parentid = #{parentid}
+    </select>
+    <!-- 插入新文件信息   -->
+    <insert id="insertFileDetail" parameterType="FileDetail">
+        insert into filedetailtable value(#{fileid},#{parentid}, #{name}, #{time}, #{style}, #{size})
+    </insert>
+
+    <insert id="insertFileIndex" parameterType="FileIndex">
+        insert into fileindextable value(#{id},#{file})
+    </insert>
+
+    <select id="selectShareFile" parameterType="String" resultType="ShareFile">
+        select * from filesharetable where shareid = #{shareid}
+    </select>
+
+    <delete id="deleteShareFile" parameterType="ShareFile">
+        delete from filesharetable where shareid = #{shareid}
+    </delete>
+
+    <select id="selectByFileid" parameterType="String" resultType="FileDetail">
+        select * from filedetailtable where fileid = #{fileid}
+    </select>
+
+    <update id="updateSizeByFileid" parameterType="Map">
+        update filedetailtable set size = #{size} where fileid = #{fileid}
+    </update>
+
+    <update id="updateNamebyFileid" parameterType="Map">
+        update filedetailtable set name = #{name} where fileid = #{fileid}
+    </update>
+
+    <insert id="insertShareFile" parameterType="ShareFile">
+        insert into filesharetable value(#{shareid}, #{fileid}, #{userid}, #{time}, #{accessid})
+    </insert>
+
+    <select id="selectFileById" parameterType="String" resultType="FileIndex">
+        select * from fileindextable where fileid = #{id}
+    </select>
+
+    <delete id="deleteFileIndexByFileid" parameterType="String">
+        delete from fileindextable where fileid = #{fileid}
+    </delete>
+
+    <delete id="deleteFileDetailByFieid" parameterType="String">
+        delete from filedetailtable where fileid = #{fileid}
+    </delete>
+</mapper>
