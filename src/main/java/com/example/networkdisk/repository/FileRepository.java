@@ -2,7 +2,6 @@ package com.example.networkdisk.repository;
 
 import com.example.networkdisk.entity.FileDetail;
 import com.example.networkdisk.entity.FileIndex;
-import com.example.networkdisk.entity.ShareFile;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

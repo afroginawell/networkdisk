@@ -1,6 +1,5 @@
 package com.example.networkdisk.repository;
 
-import com.example.networkdisk.entity.BUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

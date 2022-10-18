@@ -1,12 +1,9 @@
 package com.example.networkdisk.service.userService;
 
-import com.example.networkdisk.entity.BUser;
 import com.example.networkdisk.entity.FileDetail;
 import com.example.networkdisk.entity.FileIndex;
-import com.example.networkdisk.entity.ShareFile;
 import com.example.networkdisk.repository.FileRepository;
 import com.example.networkdisk.util.MyUtil;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.processing.Filer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.util.*;
 
 @Service

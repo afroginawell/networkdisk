@@ -1,6 +1,6 @@
 package com.example.networkdisk.service.userService;
 
-import com.example.networkdisk.entity.BUser;
+import com.example.networkdisk.entity.User;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
@@ -12,5 +12,5 @@ public interface UserLoginService {
     /**
      * 实现登录逻辑业务的方法
      */
-    public String login(BUser bUser, HttpSession session, Model model);
+    public String login(User user, HttpSession session, Model model);
 }

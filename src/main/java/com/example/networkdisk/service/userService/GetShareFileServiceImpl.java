@@ -1,8 +1,6 @@
 package com.example.networkdisk.service.userService;
 
-import com.example.networkdisk.entity.BUser;
 import com.example.networkdisk.entity.FileDetail;
-import com.example.networkdisk.entity.ShareFile;
 import com.example.networkdisk.repository.FileRepository;
 import com.example.networkdisk.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;

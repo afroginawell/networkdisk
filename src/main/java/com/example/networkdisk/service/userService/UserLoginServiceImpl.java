@@ -1,7 +1,8 @@
 package com.example.networkdisk.service.userService;
 
-import com.example.networkdisk.entity.BUser;
+
 import com.example.networkdisk.entity.FileDetail;
+import com.example.networkdisk.entity.User;
 import com.example.networkdisk.repository.FileRepository;
 import com.example.networkdisk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +30,17 @@ public class UserLoginServiceImpl implements UserLoginService {
      * 登录业务逻辑实现方法
      */
     @Override
-    public String login(BUser bUser, HttpSession session, Model model) {
+    public String login(User user, HttpSession session, Model model) {
         // 获取session中的validateCode属性
         String validateCode = (String) session.getAttribute("validateCode");
-        if (!validateCode.equalsIgnoreCase(bUser.getValidateCode())) {
+        if (!validateCode.equalsIgnoreCase(user.getValidateCode())) {
             model.addAttribute("errorMessage", "验证码错误！");
             return "error";
         }
-        List<BUser> list = userRepository.userLogin(bUser);
+        List<user> list = userRepository.userLogin(user);
         if (list.size() > 0) {
             // 将查询到的用户信息存入session中
-            session.setAttribute("bUser", list.get(0));
+            session.setAttribute("user", list.get(0));
             // 将父文件存入session中
             List<FileDetail> fd = fileRepository.selectByParentid(list.get(0).getId());
             Map<String,String> parentFile =  new LinkedHashMap<>();

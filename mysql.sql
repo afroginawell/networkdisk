@@ -21,10 +21,10 @@ USE networkdisk;
 -- 完成对表的修改后，再设置外键约束，SET FROEIGN_KEY_CHECKS = 1;
 SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
--- `ausertable`的表单结构
+-- `admintable`的表单结构
 -- ----------------------------
-DROP TABLE IF EXISTS `ausertable`;
-CREATE TABLE `ausertable`
+DROP TABLE IF EXISTS `admintable`;
+CREATE TABLE `admintable`
 (
     `id`   varchar(3) COLLATE utf8_unicode_ci  NOT NULL COMMENT '管理员ID',
     `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '昵称',
@@ -35,16 +35,16 @@ CREATE TABLE `ausertable`
   COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
--- `ausertable`的记录
+-- `usertable`的记录
 -- ----------------------------
-INSERT INTO ausertable
+INSERT INTO admintable
 VALUES ('001', 'admin', '123456');
 
 -- ----------------------------
--- `busertable`的表单结构
+-- `usertable`的表单结构
 -- ----------------------------
-DROP TABLE IF EXISTS `busertable`;
-CREATE TABLE `busertable`
+DROP TABLE IF EXISTS `usertable`;
+CREATE TABLE `usertable`
 (
     `id`    varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户ID',
     `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '邮箱',
@@ -56,16 +56,16 @@ CREATE TABLE `busertable`
   COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
--- Records of busertable
+-- Records of usertable
 -- ----------------------------
-INSERT INTO busertable
+INSERT INTO usertable
 VALUES ('12345678910', '12345678910@qq.com', '12345678910', '第1个用户');
 
 -- ----------------------------
--- Table structure for `systemlogtable`
+-- Table structure for `systemfilelogtable`
 -- ----------------------------
-DROP TABLE IF EXISTS `systemlogtable`;
-CREATE TABLE `systemlogtable`
+DROP TABLE IF EXISTS `systemfilelogtable`;
+CREATE TABLE `systemfilelogtable`
 (
     `time`  datetime COLLATE utf8_unicode_ci    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
     `id`    varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '事务发起者ID',
@@ -76,7 +76,7 @@ CREATE TABLE `systemlogtable`
   COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
--- Records of systemlogtable
+-- Records of systemfilelogtable
 -- ----------------------------
 
 -- ----------------------------
@@ -88,8 +88,8 @@ CREATE TABLE `filesharetable`
     `shareid`  varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '文件分享ID',
     `fileid`   varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '文件ID',
     `userid`   varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户',
-    `time`     datetime COLLATE utf8_unicode_ci    NOT NULL COMMENT '到期时间',
-    `accessid` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '指定访问用户ID',
+    `time`     datetime COLLATE utf8_unicode_ci    NOT NULL DEFAULT ON UPDATE CURRENT_TIMESTAMP CURRENT_TIMESTAMP COMMENT '分享日期',
+    `accessid` varchar(50) COLLATE utf8_unicode_ci COMMENT '指定访问用户ID',
     PRIMARY KEY (`shareid`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
@@ -128,7 +128,7 @@ INSERT INTO filedetailtable SET fileid='123456789aa',parentid='12345678910',name
 DROP TABLE IF EXISTS `fileindextable`;
 CREATE TABLE `fileindextable`
 (
-    `fileid` varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '文件ID',
+    `id` varchar(11) COLLATE utf8_unicode_ci NOT NULL COMMENT '文件ID',
     `file`   Mediumblob                          NOT NULL COMMENT '文件',
     PRIMARY KEY (`fileid`)
 ) ENGINE = InnoDB
@@ -143,7 +143,7 @@ CREATE TABLE `recyclebintable`
 (
     `fileid` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '文件ID',
     `userid` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户ID',
-    `time`   datetime COLLATE utf8_unicode_ci    NOT NULL COMMENT '过期时间',
+    `time`   datetime COLLATE utf8_unicode_ci    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '删除日期',
     PRIMARY KEY (`fileid`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 18

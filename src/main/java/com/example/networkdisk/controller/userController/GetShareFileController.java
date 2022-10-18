@@ -1,8 +1,6 @@
 package com.example.networkdisk.controller.userController;
 
-import com.example.networkdisk.entity.ShareFile;
 import com.example.networkdisk.service.userService.GetShareFileService;
-import com.example.networkdisk.service.userService.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
