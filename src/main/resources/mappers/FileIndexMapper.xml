@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.networkdisk.repository.FileIndexRepository">
+    <insert id="insertFileIndex" parameterType="FileIndex">
+        insert into fileindextable value(#{id},#{file})
+    </insert>
+
+    <select id="selectFileById" parameterType="String" resultType="FileIndex">
+        select * from fileindextable where fileid = #{id}
+    </select>
+
+    <delete id="deleteFileIndexByFileid" parameterType="String">
+        delete from fileindextable where fileid = #{fileid}
+    </delete>
+</mapper>

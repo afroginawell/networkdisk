@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.networkdisk.repository.FileShareRepository">
+    <select id="selectShareFile" parameterType="String" resultType="ShareFile">
+        select * from filesharetable where shareid = #{shareid}
+    </select>
+
+    <delete id="deleteShareFile" parameterType="ShareFile">
+        delete from filesharetable where shareid = #{shareid}
+    </delete>
+
+    <insert id="insertShareFile" parameterType="ShareFile">
+        insert into filesharetable value(#{shareid}, #{fileid}, #{userid}, #{time}, #{accessid})
+    </insert>
+</mapper>

@@ -121,7 +121,7 @@ CREATE TABLE `filedetailtable`
 -- Records of filedetailtable
 -- ----------------------------
 INSERT INTO filedetailtable SET fileid='123456789aa',parentid='12345678910',name='我的网盘',style='根目录',size='0 KB';
-
+INSERT INTO filedetailtable SET fileid='123456789AA',parentid='12345678910',name='我的网盘',style='根目录',size='0 KB';
 -- ----------------------------
 -- Table structure for `fileindextable`
 -- ----------------------------

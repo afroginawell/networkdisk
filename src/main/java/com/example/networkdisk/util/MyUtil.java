@@ -97,30 +97,6 @@ public class MyUtil {
     }
 
     /**
-     * 检查bUser实体类的数据基本错误
-     */
-    public static String bUserBaseError(BUser bUser){
-        String message = "";
-
-        if(bUser.getEmail().isBlank()){
-            message += "邮箱必须输入！";
-        }
-        if(!bUser.getEmail().matches(".+@.+\\..+")){
-            message += "邮箱格式不正确！";
-        }
-        if(bUser.getPwd().length()>20 && bUser.getPwd().length()<6){
-            message += "密码长度在6到20之间！";
-        }
-        if(!bUser.getPwd().matches("[0-9a-zA-Z]{1,}")){
-            message += "密码仅限字母和数字，字母不区分大小写";
-        }
-        if(bUser.getValidateCode().isBlank()){
-            message += "验证码必须输入！";
-        }
-        return message;
-    }
-
-    /**
      * 随机生成11位由数字组成的字符串
      */
     public static String createUserId(){
